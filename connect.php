@@ -5,7 +5,6 @@ class Sql extends mysqli {
     public function __construct($n ,$h ,$p ,$d)
     {
         $this->connection = new mysqli($h,$n,$p,$d);
-
         $this->valid_conn($n,$h,$p,$d);
     }
     protected function reconnect($n ,$h ,$p ,$d){
@@ -27,9 +26,6 @@ class Sql extends mysqli {
         }
 
     }
-    public function terminateConnection(){
-        print_r($this->connection->close());
-    }
 
 }
 
@@ -49,13 +45,12 @@ class Elements extends Sql{
     }
 
 
-    public function empty_test($name,$host,$password,$data_base){
+    public function valid_test($name,$host,$password,$data_base){
 
         echo $name;
         try{
 
             for($i = 0; $i < count($this->elements);$i++){
-                echo $i ;
                 if(empty($this->elements[$i])){
                     throw new Exception("Re-enter the connection");
                 }elseif ($i == count($this->elements)-1){
